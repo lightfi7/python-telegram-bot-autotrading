@@ -1,16 +1,33 @@
-# This is a sample Python script.
+# app.py
+from dotenv import load_dotenv
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+load_dotenv()
+
+from flask import Flask, request
+from cache import init_cache
+from telegram import setup_webhook, send_message
+from mastermind import generate_response
+
+app = Flask(__name__)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+@app.route('/', methods=['POST'])
+def handle_update():
+    data = request.get_json(force=True)
+    response = generate_response(data)
+    send_message(response)
+    return 'OK'
 
 
-# Press the green button in the gutter to run the script.
+@app.route('/set_webhook', methods=['GET', 'POST'])
+def set_webhook():
+    s = setup_webhook()
+    if s:
+        return "webhook setup ok"
+    else:
+        return "webhook setup failed"
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    init_cache()
+    app.run(host='0.0.0.0', port=5000)
