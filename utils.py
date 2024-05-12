@@ -14,7 +14,7 @@ def is_hex(s):
 
 def generate_key(user):
     cipher = AES.new(key, AES.MODE_CFB, iv)
-    user_data = f'{user.id}@{user.username}'
+    user_data = f'{user["id"]}@{user["username"]}'
     return ''.join(f'{byte:02X}' for byte in cipher.encrypt(user_data.encode('utf-8')))
 
 

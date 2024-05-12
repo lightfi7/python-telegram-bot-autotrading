@@ -1,7 +1,7 @@
 OPTIONS = [
-    [{'label': '🙍‍♂️ Account Type', 'value': 'account#type'},
-     {'label': '🛒 Trading Amount', 'value': 'trading#amount'}],
+    [{'label': '🙍‍♂️ Account Type', 'value': 'account_type'},
+     {'label': '🛒 Trading Amount', 'value': 'trading_amount'}],
     [{'label': '💎 Strategy', 'value': 'strategy'},
-     {'label': '⚖ Martin gale', 'value': 'martin#gale'}]]
+     {'label': '⚖ Martin gale', 'value': 'martin_gale'}]]
 
 LANGUAGES = [['English 🇺🇸', 'Spanish 🇪🇸'], ['French 🇫🇷', 'Portuguese 🇵🇹']]

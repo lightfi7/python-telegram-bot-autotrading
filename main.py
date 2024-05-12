@@ -14,8 +14,7 @@ app = Flask(__name__)
 @app.route('/', methods=['POST'])
 def handle_update():
     data = request.get_json(force=True)
-    response = generate_response(data)
-    send_message(response)
+    generate_response(data)
     return 'OK'
 
 
