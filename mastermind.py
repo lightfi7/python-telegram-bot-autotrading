@@ -49,7 +49,7 @@ def generate_response(data):
     else:
         user_id = query['from']['id']
         text = query['text']
-        cached(user_id, {
+        user = cached(user_id, {
             'id': query['from']['id'],
             'username': query['from']['username'],
             'language': 'English',
@@ -78,6 +78,17 @@ def generate_response(data):
                     'inline_keyboard': keyboard
                 }
             }
+        elif '/membership' in text.lower():
+            if 'perm' in user and user['perm'] == 'user':
+                msg = (
+                    '👌 Your bot was started'
+                )
+
+            return {
+                'chat_id': user_id,
+                'text': ''
+            }
+            pass
     return {
         'chat_id': user_id,
         'text': '😊'
