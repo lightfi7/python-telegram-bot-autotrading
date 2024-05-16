@@ -1,0 +1,754 @@
+[
+  {
+    "order_id": "24998316-8f65-4714-9dc6-38f874840e1e",
+    "order_ref": "appZrGN",
+    "order_status": "paid",
+    "product_type": "membership",
+    "payment_method": "credit_card",
+    "store_id": "yJE4Hm9PfqMhdKX",
+    "payment_merchant_id": "77847475",
+    "installments": 1,
+    "card_type": "mastercard",
+    "card_last4digits": "6900",
+    "card_rejection_reason": null,
+    "boleto_URL": null,
+    "boleto_barcode": null,
+    "boleto_expiry_date": null,
+    "pix_code": null,
+    "pix_expiration": null,
+    "sale_type": "producer",
+    "created_at": "2024-05-16 01:31",
+    "updated_at": "2024-05-16 01:31",
+    "approved_date": "2024-05-17 01:31",
+    "refunded_at": null,
+    "webhook_event_type": "order_approved",
+    "Product": {
+      "product_id": "783cfa6e-d293-4994-9078-e4a0faf28b1c",
+      "product_name": "Example product"
+    },
+    "Customer": {
+      "full_name": "John Doe",
+      "first_name": "John",
+      "email": "johndoe@example.com",
+      "mobile": "+75173853300",
+      "CPF": "58636168829",
+      "ip": "a1d3:a0f4:c97:5f0e:1d0b:d2a0:15f0:9f"
+    },
+    "Commissions": {
+      "charge_amount": "9149",
+      "product_base_price": "9149",
+      "kiwify_fee": "1006",
+      "commissioned_stores": [
+        {
+          "id": "77a180fe-6d2d-48a2-b535-a693bcb1bad9",
+          "type": "producer",
+          "custom_name": "Example store",
+          "email": "example@store.domain",
+          "value": "8143"
+        }
+      ],
+      "currency": "BRL",
+      "my_commission": "8143",
+      "funds_status": null,
+      "estimated_deposit_date": null,
+      "deposit_date": null
+    },
+    "TrackingParameters": {
+      "src": null,
+      "sck": null,
+      "utm_source": null,
+      "utm_medium": null,
+      "utm_campaign": null,
+      "utm_content": null,
+      "utm_term": null
+    },
+    "Subscription": {
+      "id": "bed0093d-db3f-4535-ab87-c85a6bcd612d",
+      "start_date": "2024-05-13T01:31:44.826Z",
+      "next_payment": "2024-05-20T01:31:44.826Z",
+      "status": "active",
+      "plan": {
+        "id": "df77b35e-39a6-4ccc-b089-0a9495fc386f",
+        "name": "Example plan",
+        "frequency": "weekly",
+        "qty_charges": 0
+      },
+      "charges": {
+        "completed": [
+          {
+            "order_id": "24998316-8f65-4714-9dc6-38f874840e1e",
+            "amount": 8143,
+            "status": "paid",
+            "installments": 1,
+            "card_type": "mastercard",
+            "card_last_digits": "9748",
+            "card_first_digits": "891218",
+            "created_at": "2024-05-13T01:31:44.826Z"
+          }
+        ],
+        "future": [
+          {
+            "charge_date": "2024-05-20T01:31:44.826Z"
+          }
+        ]
+      }
+    },
+    "subscription_id": "bed0093d-db3f-4535-ab87-c85a6bcd612d",
+    "access_url": null
+  },
+
+  {
+    "order_id": "e7877f1a-efa3-4faa-a0ab-df554af5acc8",
+    "order_ref": "hzTNIBC",
+    "order_status": "refused",
+    "product_type": "membership",
+    "payment_method": "credit_card",
+    "store_id": "FLuLFsrLQQL5uwI",
+    "payment_merchant_id": "77711581",
+    "installments": 1,
+    "card_type": "mastercard",
+    "card_last4digits": "4504",
+    "card_rejection_reason": "possible_fraud_ip",
+    "boleto_URL": null,
+    "boleto_barcode": null,
+    "boleto_expiry_date": null,
+    "pix_code": null,
+    "pix_expiration": null,
+    "sale_type": "producer",
+    "created_at": "2024-05-16 01:32",
+    "updated_at": "2024-05-16 01:32",
+    "approved_date": null,
+    "refunded_at": null,
+    "webhook_event_type": "order_rejected",
+    "Product": {
+      "product_id": "c1fd8490-c17d-4e01-b0e5-a9f4def6a09e",
+      "product_name": "Example product"
+    },
+    "Customer": {
+      "full_name": "John Doe",
+      "first_name": "John",
+      "email": "johndoe@example.com",
+      "mobile": "+11534112708",
+      "CPF": "60248875781",
+      "ip": "27.27.132.148"
+    },
+    "Commissions": {
+      "charge_amount": "6005",
+      "product_base_price": "6005",
+      "kiwify_fee": "661",
+      "commissioned_stores": [
+        {
+          "id": "f7f0256d-fdc6-44c5-a548-4baa432ca5db",
+          "type": "producer",
+          "custom_name": "Example store",
+          "email": "example@store.domain",
+          "value": "5344"
+        }
+      ],
+      "currency": "BRL",
+      "my_commission": "5344",
+      "funds_status": null,
+      "estimated_deposit_date": null,
+      "deposit_date": null
+    },
+    "TrackingParameters": {
+      "src": null,
+      "sck": null,
+      "utm_source": null,
+      "utm_medium": null,
+      "utm_campaign": null,
+      "utm_content": null,
+      "utm_term": null
+    }
+  },
+
+  {
+    "order_id": "b1614373-8c65-4751-84af-9d33ea1fd30e",
+    "order_ref": "izGsdYy",
+    "order_status": "paid",
+    "product_type": "membership",
+    "payment_method": "credit_card",
+    "store_id": "OwjRUlioEUxsfxL",
+    "payment_merchant_id": "63877639",
+    "installments": 1,
+    "card_type": "mastercard",
+    "card_last4digits": "9664",
+    "card_rejection_reason": null,
+    "boleto_URL": null,
+    "boleto_barcode": null,
+    "boleto_expiry_date": null,
+    "pix_code": null,
+    "pix_expiration": null,
+    "sale_type": "producer",
+    "created_at": "2024-05-16 01:33",
+    "updated_at": "2024-05-16 01:33",
+    "approved_date": null,
+    "refunded_at": null,
+    "webhook_event_type": "subscription_renewed",
+    "Product": {
+      "product_id": "fd89e266-860e-4a52-912b-3f64893db618",
+      "product_name": "Example product"
+    },
+    "Customer": {
+      "full_name": "John Doe",
+      "first_name": "John",
+      "email": "johndoe@example.com",
+      "mobile": "+83755383934",
+      "CPF": "99998284441",
+      "ip": "2.5.153.72"
+    },
+    "Commissions": {
+      "charge_amount": "3380",
+      "product_base_price": "3380",
+      "kiwify_fee": "372",
+      "commissioned_stores": [
+        {
+          "id": "d25ef33d-66f6-4670-a9d3-bd5eb1f65793",
+          "type": "producer",
+          "custom_name": "Example store",
+          "email": "example@store.domain",
+          "value": "3008"
+        }
+      ],
+      "currency": "BRL",
+      "my_commission": "3008",
+      "funds_status": null,
+      "estimated_deposit_date": null,
+      "deposit_date": null
+    },
+    "TrackingParameters": {
+      "src": null,
+      "sck": null,
+      "utm_source": null,
+      "utm_medium": null,
+      "utm_campaign": null,
+      "utm_content": null,
+      "utm_term": null
+    },
+    "Subscription": {
+      "id": "70585eaf-2088-4329-9284-ed43e1067820",
+      "start_date": "2024-05-13T01:33:03.362Z",
+      "next_payment": "2024-05-20T01:33:03.362Z",
+      "status": "active",
+      "plan": {
+        "id": "7d5ec5d1-d692-4659-b29f-a9e73b53f8ec",
+        "name": "Example plan",
+        "frequency": "weekly",
+        "qty_charges": 0
+      },
+      "charges": {
+        "completed": [
+          {
+            "order_id": "b1614373-8c65-4751-84af-9d33ea1fd30e",
+            "amount": 3008,
+            "status": "paid",
+            "installments": 1,
+            "card_type": "mastercard",
+            "card_last_digits": "7659",
+            "card_first_digits": "616320",
+            "created_at": "2024-05-13T01:33:03.362Z"
+          }
+        ],
+        "future": [{ "charge_date": "2024-05-20T01:33:03.362Z" }]
+      }
+    },
+    "subscription_id": "70585eaf-2088-4329-9284-ed43e1067820"
+  },
+
+  {
+    "order_id": "b19cc028-4711-42f1-aab6-1248ddddba2f",
+    "order_ref": "wNXPfun",
+    "order_status": "paid",
+    "product_type": "membership",
+    "payment_method": "credit_card",
+    "store_id": "iiKCMGxih5pZPX5",
+    "payment_merchant_id": "65078769",
+    "installments": 1,
+    "card_type": "mastercard",
+    "card_last4digits": "5368",
+    "card_rejection_reason": null,
+    "boleto_URL": null,
+    "boleto_barcode": null,
+    "boleto_expiry_date": null,
+    "pix_code": null,
+    "pix_expiration": null,
+    "sale_type": "producer",
+    "created_at": "2024-05-16 01:33",
+    "updated_at": "2024-05-16 01:33",
+    "approved_date": null,
+    "refunded_at": null,
+    "webhook_event_type": "subscription_late",
+    "Product": {
+      "product_id": "abe7b38b-16da-4386-9b2a-907896fbca04",
+      "product_name": "Example product"
+    },
+    "Customer": {
+      "full_name": "John Doe",
+      "first_name": "John",
+      "email": "johndoe@example.com",
+      "mobile": "+51875008073",
+      "CPF": "70939964790",
+      "ip": "153.174.104.135"
+    },
+    "Commissions": {
+      "charge_amount": "2693",
+      "product_base_price": "2693",
+      "kiwify_fee": "296",
+      "commissioned_stores": [
+        {
+          "id": "1a8e3e48-39b5-458f-9f79-cfa161ca21da",
+          "type": "producer",
+          "custom_name": "Example store",
+          "email": "example@store.domain",
+          "value": "2397"
+        }
+      ],
+      "currency": "BRL",
+      "my_commission": "2397",
+      "funds_status": null,
+      "estimated_deposit_date": null,
+      "deposit_date": null
+    },
+    "TrackingParameters": {
+      "src": null,
+      "sck": null,
+      "utm_source": null,
+      "utm_medium": null,
+      "utm_campaign": null,
+      "utm_content": null,
+      "utm_term": null
+    },
+    "Subscription": {
+      "id": "1cbd8750-7434-4b3e-96ab-905233811dbf",
+      "start_date": "2024-05-13T01:33:34.872Z",
+      "next_payment": "2024-05-20T01:33:34.872Z",
+      "status": "waiting_payment",
+      "plan": {
+        "id": "ad326988-6165-4f7c-94e4-7259c8c508d7",
+        "name": "Example plan",
+        "frequency": "weekly",
+        "qty_charges": 0
+      },
+      "charges": {
+        "completed": [],
+        "future": [{ "charge_date": "2024-05-20T01:33:34.872Z" }]
+      }
+    },
+    "subscription_id": "1cbd8750-7434-4b3e-96ab-905233811dbf"
+  },
+
+  {
+    "order_id": "895f8e65-37a8-40c8-9b22-67845c96a5d7",
+    "order_ref": "wObEvhF",
+    "order_status": "refunded",
+    "product_type": "membership",
+    "payment_method": "credit_card",
+    "store_id": "7PWVfV6wCaIPOmm",
+    "payment_merchant_id": "53718056",
+    "installments": 1,
+    "card_type": "mastercard",
+    "card_last4digits": "1139",
+    "card_rejection_reason": null,
+    "boleto_URL": null,
+    "boleto_barcode": null,
+    "boleto_expiry_date": null,
+    "pix_code": null,
+    "pix_expiration": null,
+    "sale_type": "producer",
+    "created_at": "2024-05-16 01:33",
+    "updated_at": "2024-05-16 01:33",
+    "approved_date": null,
+    "refunded_at": "2024-05-17 01:33",
+    "webhook_event_type": "subscription_canceled",
+    "Product": {
+      "product_id": "23446977-d383-4be1-8920-9e1f4d88de7a",
+      "product_name": "Example product"
+    },
+    "Customer": {
+      "full_name": "John Doe",
+      "first_name": "John",
+      "email": "johndoe@example.com",
+      "mobile": "+98104262276",
+      "CPF": "52763841943",
+      "ip": "a683:72e5:1971:133e:7682:d505:bfb9:61d0"
+    },
+    "Commissions": {
+      "charge_amount": "4180",
+      "product_base_price": "4180",
+      "kiwify_fee": "460",
+      "commissioned_stores": [
+        {
+          "id": "43f8b3bf-3578-4836-b8ee-bd748fac9568",
+          "type": "producer",
+          "custom_name": "Example store",
+          "email": "example@store.domain",
+          "value": "3720"
+        }
+      ],
+      "currency": "BRL",
+      "my_commission": "3720",
+      "funds_status": null,
+      "estimated_deposit_date": null,
+      "deposit_date": null
+    },
+    "TrackingParameters": {
+      "src": null,
+      "sck": null,
+      "utm_source": null,
+      "utm_medium": null,
+      "utm_campaign": null,
+      "utm_content": null,
+      "utm_term": null
+    },
+    "Subscription": {
+      "id": "d2393aae-8167-4d78-9f4b-893f8a347a73",
+      "start_date": "2024-05-13T01:33:50.216Z",
+      "next_payment": "2024-05-20T01:33:50.216Z",
+      "status": "canceled",
+      "plan": {
+        "id": "c66fd123-a29a-424c-9481-0c9b6dabb138",
+        "name": "Example plan",
+        "frequency": "weekly",
+        "qty_charges": 0
+      },
+      "charges": {
+        "completed": [],
+        "future": [{ "charge_date": "2024-05-20T01:33:50.216Z" }]
+      }
+    },
+    "subscription_id": "d2393aae-8167-4d78-9f4b-893f8a347a73"
+  },
+
+  {
+    "order_id": "209f2f16-c49e-419b-8b36-6e2f9bcc5e64",
+    "order_ref": "EszHZvG",
+    "order_status": "chargedback",
+    "product_type": "membership",
+    "payment_method": "credit_card",
+    "store_id": "rjhuF1BJZcFyAyo",
+    "payment_merchant_id": "22208012",
+    "installments": 1,
+    "card_type": "mastercard",
+    "card_last4digits": "9355",
+    "card_rejection_reason": null,
+    "boleto_URL": null,
+    "boleto_barcode": null,
+    "boleto_expiry_date": null,
+    "pix_code": null,
+    "pix_expiration": null,
+    "sale_type": "producer",
+    "created_at": "2024-05-16 01:34",
+    "updated_at": "2024-05-16 01:34",
+    "approved_date": null,
+    "refunded_at": null,
+    "webhook_event_type": "chargeback",
+    "Product": {
+      "product_id": "6bc1d1f4-96cf-4092-865c-5ea751e462ce",
+      "product_name": "Example product"
+    },
+    "Customer": {
+      "full_name": "John Doe",
+      "first_name": "John",
+      "email": "johndoe@example.com",
+      "mobile": "+27653369889",
+      "CPF": "18616758179",
+      "ip": "75.57.12.42"
+    },
+    "Commissions": {
+      "charge_amount": "6860",
+      "product_base_price": "6860",
+      "kiwify_fee": "755",
+      "commissioned_stores": [
+        {
+          "id": "9746ccfb-454a-40e1-a387-cf87e3ab33ea",
+          "type": "producer",
+          "custom_name": "Example store",
+          "email": "example@store.domain",
+          "value": "6105"
+        }
+      ],
+      "currency": "BRL",
+      "my_commission": "6105",
+      "funds_status": null,
+      "estimated_deposit_date": null,
+      "deposit_date": null
+    },
+    "TrackingParameters": {
+      "src": null,
+      "sck": null,
+      "utm_source": null,
+      "utm_medium": null,
+      "utm_campaign": null,
+      "utm_content": null,
+      "utm_term": null
+    },
+    "Subscription": {
+      "id": "cb54bef9-1410-4c80-ac0a-0558b306a29e",
+      "start_date": "2024-05-13T01:34:06.069Z",
+      "next_payment": "2024-05-20T01:34:06.069Z",
+      "status": "active",
+      "plan": {
+        "id": "1cf80ffe-31d2-4e13-8f1b-d89c324f2387",
+        "name": "Example plan",
+        "frequency": "weekly",
+        "qty_charges": 0
+      },
+      "charges": {
+        "completed": [
+          {
+            "order_id": "209f2f16-c49e-419b-8b36-6e2f9bcc5e64",
+            "amount": 6105,
+            "status": "paid",
+            "installments": 1,
+            "card_type": "mastercard",
+            "card_last_digits": "7551",
+            "card_first_digits": "147568",
+            "created_at": "2024-05-13T01:34:06.069Z"
+          }
+        ],
+        "future": [{ "charge_date": "2024-05-20T01:34:06.069Z" }]
+      }
+    },
+    "subscription_id": "cb54bef9-1410-4c80-ac0a-0558b306a29e"
+  },
+
+  {
+    "order_id": "40c459d1-9883-441b-9b98-e68cfd476409",
+    "order_ref": "uFBYeYm",
+    "order_status": "refunded",
+    "product_type": "membership",
+    "payment_method": "credit_card",
+    "store_id": "183UEaDHgwnPhen",
+    "payment_merchant_id": "14439666",
+    "installments": 1,
+    "card_type": "mastercard",
+    "card_last4digits": "9660",
+    "card_rejection_reason": null,
+    "boleto_URL": null,
+    "boleto_barcode": null,
+    "boleto_expiry_date": null,
+    "pix_code": null,
+    "pix_expiration": null,
+    "sale_type": "producer",
+    "created_at": "2024-05-16 01:34",
+    "updated_at": "2024-05-16 01:34",
+    "approved_date": null,
+    "refunded_at": "2024-05-17 01:34",
+    "webhook_event_type": "order_refunded",
+    "Product": {
+      "product_id": "6bbbf280-289b-42b7-a071-3bd8026491d0",
+      "product_name": "Example product"
+    },
+    "Customer": {
+      "full_name": "John Doe",
+      "first_name": "John",
+      "email": "johndoe@example.com",
+      "mobile": "+78404537904",
+      "CPF": "42074396274",
+      "ip": "7615:13f1:d104:d9ce:bd8e:11e4:d5fd:ac1"
+    },
+    "Commissions": {
+      "charge_amount": "9281",
+      "product_base_price": "9281",
+      "kiwify_fee": "1021",
+      "commissioned_stores": [
+        {
+          "id": "60b4e99e-66d3-4999-8e69-f27ef2afcd94",
+          "type": "producer",
+          "custom_name": "Example store",
+          "email": "example@store.domain",
+          "value": "8260"
+        }
+      ],
+      "currency": "BRL",
+      "my_commission": "8260",
+      "funds_status": null,
+      "estimated_deposit_date": null,
+      "deposit_date": null
+    },
+    "TrackingParameters": {
+      "src": null,
+      "sck": null,
+      "utm_source": null,
+      "utm_medium": null,
+      "utm_campaign": null,
+      "utm_content": null,
+      "utm_term": null
+    },
+    "Subscription": {
+      "id": "96424360-872d-480f-b01b-8066bca5df18",
+      "start_date": "2024-05-13T01:34:17.961Z",
+      "next_payment": "2024-05-20T01:34:17.961Z",
+      "status": "canceled",
+      "plan": {
+        "id": "5c5fa649-312e-4504-b7c7-9d8e4dcd1b7e",
+        "name": "Example plan",
+        "frequency": "weekly",
+        "qty_charges": 0
+      },
+      "charges": {
+        "completed": [],
+        "future": [{ "charge_date": "2024-05-20T01:34:17.961Z" }]
+      }
+    },
+    "subscription_id": "96424360-872d-480f-b01b-8066bca5df18"
+  },
+
+  {
+    "order_id": "5ea811b8-e72d-40e3-99b9-26b8d7792303",
+    "order_ref": "EJbkjRS",
+    "order_status": "waiting_payment",
+    "product_type": "membership",
+    "payment_method": "pix",
+    "store_id": "DqlihiOsvjSyxYc",
+    "payment_merchant_id": "37480293",
+    "installments": null,
+    "card_type": "",
+    "card_last4digits": "",
+    "card_rejection_reason": null,
+    "boleto_URL": null,
+    "boleto_barcode": null,
+    "boleto_expiry_date": null,
+    "pix_code": "00020101021226840014br.gov.bcb.pix2562pix-h.stone.com.br/pix/v2/ee77b9e9-67fb-4b62-829b-b6537068aa7b5204000053039865406970.005802BR5924Pagar.me Pagamentos S.A.6014RIO DE JANEIRO622905253b6997c1ef2f4b2597b6e11de6304ED77",
+    "pix_expiration": "20/05/2024 01:34",
+    "sale_type": "producer",
+    "created_at": "2024-05-16 01:34",
+    "updated_at": "2024-05-16 01:34",
+    "approved_date": null,
+    "refunded_at": null,
+    "webhook_event_type": "pix_created",
+    "Product": {
+      "product_id": "602efce5-225d-43c2-9476-58d474a73395",
+      "product_name": "Example product"
+    },
+    "Customer": {
+      "full_name": "John Doe",
+      "first_name": "John",
+      "email": "johndoe@example.com",
+      "mobile": "+69765113175",
+      "CPF": "31229185262",
+      "ip": "119.247.236.169"
+    },
+    "Commissions": {
+      "charge_amount": "1547",
+      "product_base_price": "1547",
+      "kiwify_fee": "170",
+      "commissioned_stores": [
+        {
+          "id": "be6a37b7-0f81-4af6-bff5-a34f55539d38",
+          "type": "producer",
+          "custom_name": "Example store",
+          "email": "example@store.domain",
+          "value": "1377"
+        }
+      ],
+      "currency": "BRL",
+      "my_commission": "1377",
+      "funds_status": null,
+      "estimated_deposit_date": null,
+      "deposit_date": null
+    },
+    "TrackingParameters": {
+      "src": null,
+      "sck": null,
+      "utm_source": null,
+      "utm_medium": null,
+      "utm_campaign": null,
+      "utm_content": null,
+      "utm_term": null
+    },
+    "Subscription": {
+      "id": "4ff87225-243c-447b-bd58-d1d65bb7e785",
+      "start_date": "2024-05-13T01:34:47.018Z",
+      "next_payment": "2024-05-20T01:34:47.018Z",
+      "status": "active",
+      "plan": {
+        "id": "4fdef217-8462-49ee-9cd3-46c606b070f3",
+        "name": "Example plan",
+        "frequency": "weekly",
+        "qty_charges": 0
+      },
+      "charges": {
+        "completed": [
+          {
+            "order_id": "5ea811b8-e72d-40e3-99b9-26b8d7792303",
+            "amount": 1377,
+            "status": "paid",
+            "installments": 1,
+            "card_type": "mastercard",
+            "card_last_digits": "9723",
+            "card_first_digits": "344787",
+            "created_at": "2024-05-13T01:34:47.018Z"
+          }
+        ],
+        "future": [{ "charge_date": "2024-05-20T01:34:47.018Z" }]
+      }
+    },
+    "subscription_id": "4ff87225-243c-447b-bd58-d1d65bb7e785"
+  },
+
+  {
+    "order_id": "972c9445-6b52-483b-8fd2-7d3cda177d06",
+    "order_ref": "SigOTii",
+    "order_status": "waiting_payment",
+    "product_type": "membership",
+    "payment_method": "boleto",
+    "store_id": "zjAfUduQATHPzA1",
+    "payment_merchant_id": "75813977",
+    "installments": null,
+    "card_type": "",
+    "card_last4digits": "",
+    "card_rejection_reason": null,
+    "boleto_URL": "https://pagar.me",
+    "boleto_barcode": "23791.22928 60005.510098 74000.046909 4 83110000300000",
+    "boleto_expiry_date": "20/05/2024",
+    "pix_code": null,
+    "pix_expiration": null,
+    "sale_type": "producer",
+    "created_at": "2024-05-16 01:34",
+    "updated_at": "2024-05-16 01:34",
+    "approved_date": null,
+    "refunded_at": null,
+    "webhook_event_type": "billet_created",
+    "Product": {
+      "product_id": "53459e34-d7fd-4843-94be-05c6e782f8bc",
+      "product_name": "Example product"
+    },
+    "Customer": {
+      "full_name": "John Doe",
+      "first_name": "John",
+      "email": "johndoe@example.com",
+      "mobile": "+51991781432",
+      "CPF": "94852015061",
+      "ip": "e21b:80e:6ace:7bb4:b0d:1e1b:30cf:4c17"
+    },
+    "Commissions": {
+      "charge_amount": "5001",
+      "product_base_price": "5001",
+      "kiwify_fee": "550",
+      "commissioned_stores": [
+        {
+          "id": "dbf24bc8-ddac-4888-91c5-4daab328a465",
+          "type": "producer",
+          "custom_name": "Example store",
+          "email": "example@store.domain",
+          "value": "4451"
+        }
+      ],
+      "currency": "BRL",
+      "my_commission": "4451",
+      "funds_status": null,
+      "estimated_deposit_date": null,
+      "deposit_date": null
+    },
+    "TrackingParameters": {
+      "src": null,
+      "sck": null,
+      "utm_source": null,
+      "utm_medium": null,
+      "utm_campaign": null,
+      "utm_content": null,
+      "utm_term": null
+    }
+  }
+]

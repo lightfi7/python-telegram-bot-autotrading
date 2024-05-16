@@ -4,9 +4,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from flask import Flask, request
-from cache import init_cache
-from telegram import setup_webhook, send_message
-from mastermind import generate_response
+from modules.cache import init_cache
+from modules.telegram import setup_webhook
+from modules.mastermind import generate_response
 
 app = Flask(__name__)
 

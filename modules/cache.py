@@ -1,3 +1,4 @@
+import datetime
 from database import insert_one, insert_many, find_one, find_many, update_one, update_many, delete_one, delete_many
 from typing import Any, Dict
 
@@ -18,21 +19,33 @@ def cached(key: str, data: Dict[str, Any]) -> Dict[str, Any]:
     Returns:
         Dict[str, Any]: The cached data.
     """
-    # Check if the key exists in the local database
-    if find_one('users', {'id': key}) is None:
-        # If not, insert the data into the local database
-        result = insert_one('users', data)
-        print(result)
-    else:
-        result = update_one('users', {'id': key}, data)
-        print(result)
+    user = data
+
     # Check if the key exists in the cache
     if key in cache:
-        return cache[key]
+        user = cache[key]
     else:
         # If not, cache the data and return it
         cache[key] = data
-        return cache[key]
+
+    # Middleware for payment
+    if 'order' in user and user['perm'] == 'user':
+        next_payment_timestamp = user['order']['subscription']['next_payment']
+        next_payment_time = datetime.datetime.strptime(next_payment_timestamp, '%Y-%m-%dT%H:%M:%S.%fZ')
+        if next_payment_time < datetime.datetime.now():
+            user['perm'] = 'guest'
+            user.pop('order')
+            cache[key] = user
+
+    # Check if the key exists in the local database
+    if find_one('users', {'id': key}) is None:
+        # If not, insert the data into the local database
+        result = insert_one('users', user)
+        print(result)
+    else:
+        result = update_one('users', {'id': key}, user)
+        print(result)
+    return user
 
 
 def init_cache() -> None:
