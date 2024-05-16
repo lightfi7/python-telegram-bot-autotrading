@@ -5,22 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b795f876-e64f-4f53-a870-9bf28eee9514" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lang/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/es.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/fr.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/pt.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/iqoption.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/mastermind.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/scheduler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webhook/response.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cache.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mastermind.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/telegram.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/telegram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/scheduler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +105,7 @@
       <workItem from="1715483925218" duration="11593000" />
       <workItem from="1715795841182" duration="4422000" />
       <workItem from="1715819845406" duration="8723000" />
-      <workItem from="1715829965639" duration="13452000" />
+      <workItem from="1715829965639" duration="15150000" />
     </task>
     <servers />
   </component>
