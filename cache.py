@@ -45,6 +45,6 @@ def init_cache() -> None:
         user_data = {
             key: user[key] for key in user
         }
-        user_data['req'] = '@None'
-        user_data['lang'] = 'English'
+        user_data['last_action'] = ''
+        user_data['language'] = 'English'
         cache[user['id']] = user_data

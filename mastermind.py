@@ -48,18 +48,19 @@ def generate_response(data):
                 msg = (
                     f'🌐 Selected language: {callback_data}\n\n'
                 )
-                return {
+                json= {
                     'chat_id': user_id,
                     'text': msg
                 }
-
+                return send_message(json)
             else:
-                return {
+                json= {
                     'chat_id': user_id,
                     'text': f'🌐 Selected language: {callback_data}\n\n'
                             f'📌 Enter your token after upgrade membership to start the bot\n\n'
                             f'🎁 Use the /membership command to upgrade your membership.',
                     'parse_mode': 'html'}
+                return send_message(json)
         elif callback_type == '@OPTION':
             if callback_data == 'account_type':
                 keyboard = [
@@ -73,19 +74,21 @@ def generate_response(data):
                           'value': '@practice'}, ]
                     ]]
 
-                return {
+                json = {
                     'chat_id': user_id,
                     'text': '‍♂️ Choose account type',
                     'reply_markup': {
                         'inline_keyboard': keyboard
                     }
                 }
+                return send_message(json)
             elif callback_data == 'trading_amount':
-                user['req'] = 'trading_amount'
-                return {
+                user['last_action'] = 'trading_amount'
+                json = {
                     'chat_id': user_id,
                     'text': 'Enter trading amount'
                 }
+                return send_message(json)
             elif callback_data == 'strategy':
                 keyboard = [
                     [{'text': opt['label'], 'callback_data': f'@OPTION:{opt["value"]}'} for opt in opts]
@@ -93,14 +96,14 @@ def generate_response(data):
                         [{'label': 'Fix amount', 'value': '@fix_amount'},
                          {'label': '%over the balance', 'value': '@over_balance'}, ]
                     ]]
-                return {
+                json = {
                     'chat_id': user_id,
                     'text': '💎 Choose strategy',
                     'reply_markup': {
                         'inline_keyboard': keyboard
                     }
                 }
-
+                return send_message(json)
             elif callback_data == 'martin_gale':
                 keyboard = [
                     [{'text': opt['label'], 'callback_data': f'@OPTION:{opt["value"]}'} for opt in opts]
@@ -119,6 +122,7 @@ def generate_response(data):
                         'inline_keyboard': keyboard
                     }
                 }
+                return send_message(json)
             elif callback_data == '@real':
                 user['config']['account_type'] = 1
                 cached(user_id, user)
@@ -127,7 +131,7 @@ def generate_response(data):
                     'text': 'You set Account type as `Real`',
                     'parse_mode': 'markdown'
                 }
-
+                return send_message(json)
             elif callback_data == '@practice':
                 user['config']['account_type'] = 2
                 cached(user_id, user)
@@ -136,6 +140,7 @@ def generate_response(data):
                     'text': 'You set Account type as `Practice`',
                     'parse_mode': 'markdown'
                 }
+                return send_message(json)
             elif callback_data == '@up2m.gale1':
                 user['config']['@up2m.gale'] = 1
                 cached(user_id, user)
@@ -144,6 +149,7 @@ def generate_response(data):
                     'text': 'You set Account type as `Up to M.Gale 1`',
                     'parse_mode': 'markdown'
                 }
+                return send_message(json)
             elif callback_data == '@up2m.gale2':
                 user['config']['@up2m.gale'] = 2
                 cached(user_id, user)
@@ -152,6 +158,7 @@ def generate_response(data):
                     'text': 'You set Account type as `Up to M.Gale 2`',
                     'parse_mode': 'markdown'
                 }
+                return send_message(json)
             elif callback_data == '@fix_amount':
                 user['last_action'] = 'fix_amount'
                 cached(user_id, user)
@@ -159,6 +166,7 @@ def generate_response(data):
                     'chat_id': user_id,
                     'text': 'Enter fix amount',
                 }
+                return send_message(json)
             elif callback_data == '@over_balance':
                 user['last_action'] = 'over_balance'
                 cached(user_id, user)
@@ -166,6 +174,7 @@ def generate_response(data):
                     'chat_id': user_id,
                     'text': 'Enter % over the balance',
                 }
+                return send_message(json)
             else:
                 pass
     elif t == 'message':

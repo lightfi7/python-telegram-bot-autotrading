@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b795f876-e64f-4f53-a870-9bf28eee9514" name="Changes" comment="" />
+    <list default="true" id="b795f876-e64f-4f53-a870-9bf28eee9514" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache.py" beforeDir="false" afterPath="$PROJECT_DIR$/cache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mastermind.py" beforeDir="false" afterPath="$PROJECT_DIR$/mastermind.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,13 +92,17 @@
       <updated>1715483397934</updated>
       <workItem from="1715483399189" duration="499000" />
       <workItem from="1715483925218" duration="11593000" />
+      <workItem from="1715795841182" duration="4422000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/python_telegram_bot_autotrading$python_telegram_bot_autotrading.coverage" NAME="python-telegram-bot-autotrading Coverage Results" MODIFIED="1715526152779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/python_telegram_bot_autotrading$python_telegram_bot_autotrading.coverage" NAME="python-telegram-bot-autotrading Coverage Results" MODIFIED="1715812432619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
