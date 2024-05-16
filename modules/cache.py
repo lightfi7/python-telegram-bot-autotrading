@@ -1,5 +1,5 @@
 import datetime
-from database import insert_one, insert_many, find_one, find_many, update_one, update_many, delete_one, delete_many
+from modules.database import insert_one, insert_many, find_one, find_many, update_one, update_many, delete_one, delete_many
 from typing import Any, Dict
 
 cache: Dict[str, Dict[str, Any]] = {}

@@ -4,8 +4,8 @@ import re
 from modules.cache import cached, cache
 from config import OPTIONS, LANGUAGES
 from modules.database import insert_one
-from telegram import send_message, copy_message
-from utils import generate_key, verify_key, is_hex
+from modules.telegram import send_message, copy_message
+from modules.utils import generate_key, verify_key, is_hex
 
 SOURCE_CHANNEL_ID = os.getenv('SOURCE_CHANNEL_ID', '')
 PAYMENT_PROVIDER_TOKEN = os.getenv('PAYMENT_PROVIDER_TOKEN', '')
