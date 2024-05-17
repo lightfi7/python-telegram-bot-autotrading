@@ -25,6 +25,7 @@ def parse_data(data):
         return 'webhook_event_type', data
     return None, data
 
+
 def parse_channel_post(data):
     pattern = r'(?:🚦ATENÇÃO M5🚦UTC -(\d+)\n\n)?([\w/]+);(\d+:\d+);(\w+)\s🟥\n\n👇🏼Em caso de loss👇🏼\n\n1º Proteção ; (\d+:\d+)\n2º Proteção ; (\d+:\d+)'
 
@@ -33,7 +34,7 @@ def parse_channel_post(data):
     if match:
         utc_offset = match.group(1)
         symbol = match.group(2)
-        time1 = match.group(3)
+        at = match.group(3)
         option = match.group(4)
         protection1 = match.group(5)
         protection2 = match.group(6)
@@ -42,18 +43,18 @@ def parse_channel_post(data):
             pass
         else:
             utc_offset = 3
-
         print(f"UTC-{utc_offset}")
         print(f"Symbol: {symbol}")
-        print(f"Time: {time1}")
+        print(f"Time: {at}")
         print(f"Option: {option}")
         print(f"1st Protection: {protection1}")
         print(f"2nd Protection: {protection2}")
 
-        return f'{utc_offset},{symbol},{time1},{option},{protection1},{protection2}'
+        return f'{utc_offset},{symbol},{at},{option},{protection1},{protection2}'
     else:
         print("No match found.")
         return None, None, None, None, None
+
 
 def generate_response(data):
     user_id = ''
@@ -81,13 +82,13 @@ def generate_response(data):
                     msg = (
                         f'🌐 Selected language: {callback_data}\n\n'
                     )
-                    json= {
+                    json = {
                         'chat_id': user_id,
                         'text': msg
                     }
                     return send_message(json)
                 else:
-                    json= {
+                    json = {
                         'chat_id': user_id,
                         'text': f'🌐 Selected language: {callback_data}\n\n'
                                 f'📌 You \'re not currently subscribed.\n\n'
@@ -213,17 +214,17 @@ def generate_response(data):
                 else:
                     pass
             elif callback_type == '@trade':
-                utc_offset, symbol, time1, option, protection1, protection2 = callback_data.split(',')
-
+                utc_offset, symbol, at, option, protection1, protection2 = callback_data.split(',')
                 # make schedule
                 insert_one('tasks', {
                     'user_id': user_id,
                     'utc_offset': utc_offset,
-                    'symbol': symbol,
-                    'time': time1,
+                    'symbol': f'{symbol}'.replace('/', ''),
+                    'time': at,
                     'option': option,
                     'protection1': protection1,
                     'protection2': protection2,
+                    'martin_gale': 0
                 })
                 pass
         elif t == 'message':
@@ -453,7 +454,7 @@ def generate_response(data):
                         user['order'] = {
                             'id': query['order_id'],
                             'status': query['order_status'],
-                            'approved_date' : query['approved_date'],
+                            'approved_date': query['approved_date'],
                             'subscription': query['subscription'],
 
                         }
@@ -479,7 +480,7 @@ def generate_response(data):
                         user['order'] = {
                             'id': query['order_id'],
                             'status': query['order_status'],
-                            'approved_date' : query['approved_date'],
+                            'approved_date': query['approved_date'],
                             'subscription': query['subscription'],
 
                         }
@@ -538,7 +539,7 @@ def generate_response(data):
             }
             send_message(json)
     except Exception as e:
-        print(e);
+        print('err:', e)
         json = {
             'chat_id': user_id,
             'text': '😶 An unexpected error occurred. Please contact support.'

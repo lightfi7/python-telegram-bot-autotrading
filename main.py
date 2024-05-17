@@ -4,9 +4,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from flask import Flask, request
+from modules.synctime import sync_utc_time
 from modules.cache import init_cache
 from modules.telegram import setup_webhook
 from modules.mastermind import generate_response
+from modules.scheduler import start_scheduler
 
 app = Flask(__name__)
 
@@ -29,4 +31,8 @@ def set_webhook():
 
 if __name__ == '__main__':
     init_cache()
-    app.run(host='0.0.0.0', port=5000)
+    if sync_utc_time() == False:
+        start_scheduler()
+        app.run(host='0.0.0.0', port=5000)
+    else:
+        print('UTC time synchronization failed.')
