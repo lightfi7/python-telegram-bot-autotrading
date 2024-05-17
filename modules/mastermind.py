@@ -6,6 +6,7 @@ from config import OPTIONS, LANGUAGES
 from modules.database import insert_one
 from modules.telegram import send_message, copy_message, edit_message, delete_message, answer_callback_query
 from modules.utils import generate_key, verify_key, is_hex
+from lang import translate
 
 SOURCE_CHANNEL_ID = os.getenv('SOURCE_CHANNEL_ID', '')
 PAYMENT_PROVIDER_TOKEN = os.getenv('PAYMENT_PROVIDER_TOKEN', '')
@@ -27,7 +28,7 @@ def parse_data(data):
 
 
 def parse_channel_post(data):
-    pattern = r'(?:🚦ATENÇÃO M5🚦UTC -(\d+)\n\n)?([\w/]+);(\d+:\d+);(\w+)\s🟥\n\n👇🏼Em caso de loss👇🏼\n\n1º Proteção ; (\d+:\d+)\n2º Proteção ; (\d+:\d+)'
+    pattern = r'(?:🚦ATENÇÃO M5🚦UTC -(\d+)\n\n)?([\w/]+(?:-OTC)?);(\d+:\d+);(\w+)\s🟥\n\n👇🏼Em caso de loss👇🏼\n\n1º Proteção ; (\d+:\d+)\n2º Proteção ; (\d+:\d+)'
 
     match = re.search(pattern, data)
 
@@ -52,7 +53,7 @@ def parse_channel_post(data):
 
         return f'{utc_offset},{symbol},{at},{option},{protection1},{protection2}'
     else:
-        print("No match found.")
+        print("no match found.")
         return None, None, None, None, None
 
 
@@ -68,19 +69,19 @@ def generate_response(data):
             user = cached(user_id, {
                 'id': query['from']['id'],
                 'username': query['from']['username'],
-                'language': 'English 🇺🇸',
+                'language': 'en',
                 'level': 0,
                 'last_action': '',
                 'config': {},
                 'perm': 'guest',
             })
             if callback_type == '@language':
-                user['language'] = callback_data
+                text, user['language'] = f'{callback_data}'.split(':')
                 user['last_action'] = 'language'
                 cached(user_id, user)
                 if 'perm' in user and user['perm'] == 'user':
                     msg = (
-                        f'🌐 Selected language: {callback_data}\n\n'
+                        f'🌐 {translate('selected_language', user['language'])}: {text}\n\n'
                     )
                     json = {
                         'chat_id': user_id,
@@ -90,9 +91,8 @@ def generate_response(data):
                 else:
                     json = {
                         'chat_id': user_id,
-                        'text': f'🌐 Selected language: {callback_data}\n\n'
-                                f'📌 You \'re not currently subscribed.\n\n'
-                                f'🎁 Use the /membership command to upgrade your membership.',
+                        'text': f'🌐 {translate('selected_language', user['language'])}: {text}\n\n'
+                                f'📌 {translate('no_subscription', user['language'])}',
                         'parse_mode': 'html'}
                     return send_message(json)
             elif callback_type == '@option':
@@ -101,16 +101,16 @@ def generate_response(data):
                     keyboard = [
                         [{'text': opt['label'], 'callback_data': f'@option>{opt["value"]}'} for opt in opts]
                         for opts in [
-                            [{'label': 'Real Account' + (
+                            [{'label': translate('real_account', user['language']) + (
                                 ' ✅' if 'config' in user['config'] and user['config']['account_type'] == 1 else ''),
                               'value': '@real'},
-                             {'label': 'Practice Account' + (
+                             {'label': translate('practice_account', user['language']) + (
                                  ' ✅' if 'config' in user['config'] and user['config']['account_type'] == 2 else ''),
                               'value': '@practice'}, ]
                         ]]
                     json = {
                         'chat_id': user_id,
-                        'text': '‍♂️ Choose account type',
+                        'text': f'‍♂️ {translate('choose_account_type', user['language'])}',
                         'reply_markup': {
                             'inline_keyboard': keyboard
                         }
@@ -118,7 +118,7 @@ def generate_response(data):
                     send_message(json)
                 if callback_data == 'language':
                     msg = (
-                        "🌐 Please select your preferred language:"
+                        f"🌐 {translate('choose_account_type', user['language'])}:"
                     )
                     keyboard = [[{'text': item, 'callback_data': f'@language>{item}'} for item in group] for group in
                                 LANGUAGES]
@@ -136,7 +136,7 @@ def generate_response(data):
                     user['last_action'] = 'trading_amount'
                     json = {
                         'chat_id': user_id,
-                        'text': 'Enter trading amount'
+                        'text': f'Enter trading amount{translate('', user['language'])}'
                     }
                     send_message(json)
                 elif callback_data == 'strategy':
@@ -144,12 +144,12 @@ def generate_response(data):
                     keyboard = [
                         [{'text': opt['label'], 'callback_data': f'@option>{opt["value"]}'} for opt in opts]
                         for opts in [
-                            [{'label': 'Fix amount', 'value': '@fix_amount'},
-                             {'label': '%over the balance', 'value': '@over_balance'}, ]
+                            [{'label': f'{translate('fix_amount', user['language'])}', 'value': '@fix_amount'},
+                             {'label': f'{translate('percent_balance', user['language'])}', 'value': '@over_balance'}, ]
                         ]]
                     json = {
                         'chat_id': user_id,
-                        'text': '💎 Choose strategy',
+                        'text': f'💎 {translate('choose_strategy', user['language'])}',
                         'reply_markup': {
                             'inline_keyboard': keyboard
                         }
@@ -160,16 +160,16 @@ def generate_response(data):
                     keyboard = [
                         [{'text': opt['label'], 'callback_data': f'@option>{opt["value"]}'} for opt in opts]
                         for opts in [
-                            [{'label': 'Up to M.Gale 1' + (
+                            [{'label': f'{translate('martin_gale_1', user['language'])}' + (
                                 ' ✅' if 'config' in user['config'] and user['config']['@up2m.gale'] == 1 else ''),
                               'value': '@up2m.gale1'},
-                             {'label': 'Up to M.Gale 2' + (
+                             {'label': f'{translate('martin_gale_2', user['language'])}' + (
                                  ' ✅' if 'config' in user['config'] and user['config']['@up2m.gale'] == 2 else ''),
                               'value': '@up2m.gale2'}, ]
                         ]]
                     json = {
                         'chat_id': user_id,
-                        'text': '⚖ Choose martin gale',
+                        'text': f'⚖ {translate('choose_martin_gale', user['language'])}',
                         'reply_markup': {
                             'inline_keyboard': keyboard
                         }
@@ -181,7 +181,7 @@ def generate_response(data):
                     cached(user_id, user)
                     json = {
                         'chat_id': user_id,
-                        'text': 'You set Account type as `Real`\nPlease register account email',
+                        'text': f'{translate('set_account_type_real', user['language'])}',
                         'parse_mode': 'markdown'
                     }
                     send_message(json)
@@ -191,7 +191,7 @@ def generate_response(data):
                     cached(user_id, user)
                     json = {
                         'chat_id': user_id,
-                        'text': 'You set Account type as `Practice`\nPlease register account email',
+                        'text': f'{translate('set_account_type_practice', user['language'])}',
                         'parse_mode': 'markdown'
                     }
                     send_message(json)
@@ -200,7 +200,7 @@ def generate_response(data):
                     cached(user_id, user)
                     json = {
                         'chat_id': user_id,
-                        'text': 'You set Martin Gale as `Up to M.Gale 1`',
+                        'text': f'{translate('set_martin_gale_1', user['language'])}',
                         'parse_mode': 'markdown'
                     }
                     send_message(json)
@@ -209,7 +209,7 @@ def generate_response(data):
                     cached(user_id, user)
                     json = {
                         'chat_id': user_id,
-                        'text': 'You set Martin Gale as `Up to M.Gale 2`',
+                        'text': f'{translate('set_martin_gale_2', user['language'])}',
                         'parse_mode': 'markdown'
                     }
                     send_message(json)
@@ -218,7 +218,7 @@ def generate_response(data):
                     cached(user_id, user)
                     json = {
                         'chat_id': user_id,
-                        'text': 'Enter fix amount',
+                        'text': f'{translate('enter_fix_amount', user['language'])}',
                     }
                     send_message(json)
                 elif callback_data == '@over_balance':
@@ -226,7 +226,7 @@ def generate_response(data):
                     cached(user_id, user)
                     json = {
                         'chat_id': user_id,
-                        'text': 'Enter % over the balance',
+                        'text': f'{translate('enter_percent_balance', user['language'])}',
                     }
                     send_message(json)
                 else:
@@ -239,14 +239,14 @@ def generate_response(data):
                     email = user['config']['account']['email']
                     password = user['config']['account']['password']
                     if email is None or password is None:
-                        msg = 'Please register your email and password'
+                        msg = f'{translate('register_email_password', user['language'])}'
                         json = {
                             'chat_id': user_id,
                             'text': msg,
                         }
                         return send_message(json)
                 else:
-                    msg = '😯 Not found your account email and password\n Use /setting command'
+                    msg = f'😯 {translate('account_not_found', user['language'])}'
                     json = {
                         'chat_id': user_id,
                         'text': msg,
@@ -256,7 +256,7 @@ def generate_response(data):
                     amount = user['config']['trading_amount']
                 if amount is None:
                     amount = 1
-                    msg = 'Default amount is 1\n To the amount, use /setting command\n'
+                    msg = f'{translate('default_amount', user['language'])}\n'
                 insert_one('tasks', {
                     'user_id': user_id,
                     'utc_offset': utc_offset,
@@ -268,7 +268,7 @@ def generate_response(data):
                     'protection2': protection2,
                     'martin_gale': 0
                 })
-                msg += f'😐 You had set the schedule for {at} in UTC-{utc_offset}'
+                msg += f'😐 {translate('schedule_set', user['language'])}'.format(at, utc_offset)
                 json = {
                     'chat_id': user_id,
                     'message_id': query['message']['message_id'],
@@ -293,7 +293,7 @@ def generate_response(data):
             user = cached(user_id, {
                 'id': query['from']['id'],
                 'username': query['from']['username'],
-                'language': 'English 🇺🇸',
+                'language': 'en',
                 'level': 0,
                 'last_action': '',
                 'config': {},
@@ -302,7 +302,7 @@ def generate_response(data):
             # Add your logic to generate a response based on the incoming message text
             if '/start' in text.lower():
                 if user['perm'] == 'user':
-                    msg = '✌️ Your bot was started'
+                    msg = f'✌️ {translate('bot_started', user['language'])}'
                     json = {
                         'chat_id': user_id,
                         'text': msg,
@@ -310,10 +310,12 @@ def generate_response(data):
                     return send_message(json)
                 else:
                     msg = (
-                        "✨ Welcome!\n Please select your preferred language:"
+                        f"✨ Welcome!\n {translate('choose_language', user['language'])}:"
                     )
-                    keyboard = [[{'text': item, 'callback_data': f'@language>{item}'} for item in group] for group in
-                                LANGUAGES]
+                    keyboard = [
+                        [{'text': item['text'], 'callback_data': f'@language>{item['text']}:{item['lang']}'} for item in
+                         group] for group in
+                        LANGUAGES]
                     json = {
                         'chat_id': user_id,
                         'text': msg,
@@ -324,10 +326,12 @@ def generate_response(data):
                     return send_message(json)
             elif '/language' in text.lower():
                 msg = (
-                    "🌐 Please select your preferred language:"
+                    f"🌐 {translate('choose_language', user['language'])}:"
                 )
-                keyboard = [[{'text': item, 'callback_data': f'@language>{item}'} for item in group] for group in
-                            LANGUAGES]
+                keyboard = [
+                    [{'text': item['text'], 'callback_data': f'@language>{item['text']}:{item['lang']}'} for item in
+                     group] for group in
+                    LANGUAGES]
                 json = {
                     'chat_id': user_id,
                     'text': msg,
@@ -339,7 +343,7 @@ def generate_response(data):
             elif '/membership' in text.lower():
                 if 'perm' in user and user['perm'] == 'user':
                     msg = (
-                        '👌 You \'re all set! \nYour subscription is active and ready for you to start the bot'
+                        f'👌 {translate('welcome_message', user['language'])}'
                     )
                     json = {
                         'chat_id': user_id,
@@ -350,16 +354,16 @@ def generate_response(data):
                 user['token'] = token
                 cached(user_id, user)
                 msg = (
-                    '🙂 Please choose your membership'
+                    f'🙂 {translate('choose_membership', user['language'])}'
                 )
                 keyboard = [
                     [
                         {
-                            'text': '💧 Monthly',
+                            'text': f'💧 {translate('membership_monthly', user['language'])}',
                             'url': f'https://pay.kiwify.com.br/CAUz5sz?btoken={token}&chat_id={user_id}'
                         },
                         {
-                            'text': '🔥 Annual',
+                            'text': f'🔥 {translate('membership_annual', user['language'])}',
                             'url': f'https://pay.kiwify.com.br/oJddJmu?btoken={token}&chat_id={user_id}'
                         }
                     ]
@@ -374,8 +378,10 @@ def generate_response(data):
                 }
                 return send_message(json)
             elif '/setting' in text.lower():
-                keyboard = [[{'text': opt['label'], 'callback_data': f'@option>{opt["value"]}'} for opt in group]
-                            for group in OPTIONS]
+                keyboard = [
+                    [{'text': translate(opt['label'], user['language']), 'callback_data': f'@option>{opt["value"]}'} for
+                     opt in group]
+                    for group in OPTIONS]
                 json = {
                     'chat_id': user_id,
                     'text': '⚙ Setting',
@@ -391,7 +397,7 @@ def generate_response(data):
                     user['last_action'] = None
                     json = {
                         'chat_id': user_id,
-                        'text': 'Trading amount is set to `{}`'.format(query['text']),
+                        'text': f'{translate('trading_amount_set', user['language'])}'.format(query['text']),
                         'parse_mode': 'markdown'
                     }
                     return send_message(json)
@@ -401,7 +407,7 @@ def generate_response(data):
                     user['last_action'] = None
                     json = {
                         'chat_id': user_id,
-                        'text': 'Fix amount is set to `{}`'.format(query['text']),
+                        'text': f'{translate('fix_amount_set', user['language'])}'.format(query['text']),
                         'parse_mode': 'markdown'
                     }
                     return send_message(json)
@@ -411,7 +417,7 @@ def generate_response(data):
                     user['last_action'] = None
                     json = {
                         'chat_id': user_id,
-                        'text': 'Over % balance is set to `{}`'.format(query['text']),
+                        'text': f'{translate('percent_balance_set', user['language'])}'.format(query['text']),
                         'parse_mode': 'markdown'
                     }
                     return send_message(json)
@@ -430,7 +436,7 @@ def generate_response(data):
                     })
                     json = {
                         'chat_id': user_id,
-                        'text': '😊 Your account email was registered, Please register password',
+                        'text': f'😊 {translate('register_email', user['language'])}',
                         'parse_mode': 'markdown'
                     }
                     return send_message(json)
@@ -441,7 +447,7 @@ def generate_response(data):
                     else:
                         send_message({
                             'chat_id': user_id,
-                            'text': '😶 You should register your account email'
+                            'text': f'😶 {translate('', user['language'])}'
                         })
                     cached(user_id, user)
                     delete_message({
@@ -451,7 +457,7 @@ def generate_response(data):
                     json = {
                         'chat_id': user_id,
                         'message_id': query['message_id'],
-                        'text': '😊 You are success to register account',
+                        'text': f'😊 {translate('account_registered', user['language'])}',
                         'parse_mode': 'markdown'
                     }
                     return send_message(json)
@@ -464,7 +470,7 @@ def generate_response(data):
                         continue
                     trade_option = parse_channel_post(query['text'])
                     keyboard = [
-                        [{'text': '⚡ Trade',
+                        [{'text': f'⚡ Trade{translate('trade', cache[uid]['language'])}',
                           'callback_data': f'@trade>{trade_option}'}]
                     ]
                     json = {
@@ -496,7 +502,7 @@ def generate_response(data):
                         insert_one('invoices', query)
                         json = {
                             'chat_id': user['id'],
-                            'text': f'👍 Thank you for your payment!'
+                            'text': f'👍 {translate('payment_success', user['language'])}'
                         }
                         return send_message(json)
                 pass
@@ -522,7 +528,7 @@ def generate_response(data):
                         insert_one('invoices', query)
                         json = {
                             'chat_id': user['id'],
-                            'text': f'👍 Thank you for your payment!'
+                            'text': f'👍 {translate('payment_success', user['language'])}'
                         }
                         return send_message(json)
                 pass
@@ -536,7 +542,7 @@ def generate_response(data):
                         insert_one('invoices', query)
                         json = {
                             'chat_id': user['id'],
-                            'text': f'😐 Your subscription payment is overdue. \nPlease update your payment method to avoid disruption in service'
+                            'text': f'😐 {translate('payment_overdue', user['language'])}'
                         }
                         return send_message(json)
                 pass
@@ -550,7 +556,7 @@ def generate_response(data):
                         insert_one('invoices', query)
                         json = {
                             'chat_id': user['id'],
-                            'text': f'😐 Your subscription has been canceled'
+                            'text': f'😐 {translate('subscription_canceled', user['language'])}'
                         }
                         return send_message(json)
                 pass
@@ -575,6 +581,6 @@ def generate_response(data):
         print('err:', e)
         json = {
             'chat_id': user_id,
-            'text': '😶 An unexpected error occurred. Please contact support.'
+            'text': f'😶 {translate('unexpected_error', user['language'])}'
         }
         send_message(json)

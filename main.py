@@ -9,6 +9,7 @@ from modules.cache import init_cache
 from modules.telegram import setup_webhook
 from modules.mastermind import generate_response
 from modules.scheduler import start_scheduler
+from lang import translate
 
 app = Flask(__name__)
 
@@ -35,4 +36,4 @@ if __name__ == '__main__':
         start_scheduler()
         app.run(host='0.0.0.0', port=5000)
     else:
-        print('UTC time synchronization failed.')
+        print('utc time sync failed.')

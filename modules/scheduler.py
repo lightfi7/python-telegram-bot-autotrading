@@ -27,9 +27,13 @@ def do_trade(task):
             'text': f'😶 Not found account email or password.'
         })
 
-    result, profit = buy(task['symbol'], task['amount'], task['option'], 1,
+    result, profit = buy(task['symbol'], 
+                         task['amount'], 
+                         task['option'], 
+                         1,
                          user['config']['account']['email'],
-                         user['config']['account']['password'])
+                         user['config']['account']['password'], 
+                         user['config']['account_type'])
     print(result, profit)
 
     if result is None:
@@ -47,10 +51,10 @@ def do_trade(task):
         'profit': profit
     })
 
-    if result == 'loose':
+    if result == 'loss':
         send_message({
             'chat_id': user_id,
-            'text': f'👎You are {result}, {profit}'
+            'text': f'👎You are {result}, {profit:6.2f}'
         })
         if task['martin_gale'] == 0:
             update_one('tasks', {'_id': task['_id']}, {
@@ -69,7 +73,7 @@ def do_trade(task):
     elif result == 'win':
         send_message({
             'chat_id': user_id,
-            'text': f'👍You are {result}, {profit}'
+            'text': f'👍You are {result}, {profit:6.2f}'
         })
         delete_one('tasks', {'_id': task['_id']})
     elif result == 'balance_off':

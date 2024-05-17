@@ -6,7 +6,7 @@ from iqoptionapi.stable_api import IQ_Option
 # logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 
-def buy(symbal, amount, option, duration, email, password):
+def buy(symbal, amount, option, duration, email, password, mode = 'PRACTICE'):
     # if email is None or password is None:
     #     email = 'Allan.traderksa@gmail.com'
     #     password = '%$iqualab%'
@@ -16,7 +16,7 @@ def buy(symbal, amount, option, duration, email, password):
 
     print(Iq.get_all_ACTIVES_OPCODE())
 
-    Iq.change_balance('PRACTICE')
+    Iq.change_balance(mode)
     balance = Iq.get_balance()
 
     payout = Iq.get_digital_payout(symbal)

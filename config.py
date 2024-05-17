@@ -1,16 +1,17 @@
-# OPTIONS = [
-#     [{'label': '🙍‍♂️ Account', 'value': 'account'},
-#      {'label': '🛒 Trading Amount', 'value': 'trading_amount'}],
-#     [{'label': '💎 Strategy', 'value': 'strategy'},
-#      {'label': '⚖ Martin gale', 'value': 'martin_gale'}],
-# ]
+from lang import translate
+
 
 OPTIONS = [
-    [{'label': '🙍‍♂️ Account', 'value': 'account'}],
-    [{'label': '🛒 Trading Amount', 'value': 'trading_amount'}],
-    [{'label': '🌐 Language', 'value': 'language'}],
+    [{'label': f'account', 'value': 'account'}],
+    [{'label': f'trading_amount', 'value': 'trading_amount'}],
+    [{'label': f'language', 'value': 'language'}],
 ]
 
 
-LANGUAGES = [['English 🇺🇸', 'Spanish 🇪🇸'], ['French 🇫🇷', 'Portuguese 🇵🇹']]
+LANGUAGES = [[
+    {'text': 'English 🇺🇸','lang': 'en'},
+    {'text': 'Spanish 🇪🇸','lang': 'es'},
+    # {'text': 'French 🇫🇷','lang': 'fr'},
+    {'text': 'Portuguese 🇵🇹','lang': 'pt'}
+]]
 
