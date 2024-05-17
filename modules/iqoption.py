@@ -3,10 +3,11 @@ import logging
 
 from iqoptionapi.stable_api import IQ_Option
 
+
 # logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 
-def buy(symbal, amount, option, duration, email, password, mode = 'PRACTICE'):
+def buy(symbal, amount, option, duration, email, password, mode='PRACTICE'):
     # if email is None or password is None:
     #     email = 'Allan.traderksa@gmail.com'
     #     password = '%$iqualab%'

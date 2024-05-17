@@ -27,14 +27,18 @@ def do_trade(task):
             'chat_id': user_id,
             'text': f'😶 {translate('account_credentials_not_found', user['language'])}'
         })
-
+    mode = 'PRACTICE'
+    if int(user['config']['account_type']) == 1:
+        mode = 'REAL'
+    elif int(user['config']['account_type']) == 2:
+        mode = 'PRACTICE'
     result, profit = buy(task['symbol'], 
                          task['amount'], 
                          task['option'], 
                          1,
                          user['config']['account']['email'],
                          user['config']['account']['password'], 
-                         user['config']['account_type'])
+                         mode)
     print(result, profit)
 
     if result is None:
