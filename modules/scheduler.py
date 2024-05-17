@@ -35,7 +35,7 @@ def do_trade(task):
     result, profit = buy(task['symbol'], 
                          task['amount'], 
                          task['option'], 
-                         1,
+                         5,
                          user['config']['account']['email'],
                          user['config']['account']['password'], 
                          mode)
