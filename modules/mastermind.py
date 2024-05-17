@@ -310,7 +310,7 @@ def generate_response(data):
                     return send_message(json)
                 else:
                     msg = (
-                        f"✨ Welcome!\n {translate('choose_language', user['language'])}:"
+                        f"✨ {translate('welcome', user['language'])}\n {translate('choose_language', user['language'])}:"
                     )
                     keyboard = [
                         [{'text': item['text'], 'callback_data': f'@language>{item['text']}:{item['lang']}'} for item in

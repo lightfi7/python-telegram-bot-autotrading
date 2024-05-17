@@ -14,7 +14,7 @@
         "enter_fix_amount": "Enter a fixed trading amount",
         "enter_percent_balance": "Enter a percentage of your balance to trade",
         "register_email_password": "Please register your email and password",
-        "account_not_found": "Couldn't find your account email and password. Use /setting to register.",
+        "account_not_found": "Not found your account email and password. Use /setting to register.",
         "default_amount": "The default trading amount is 1. To change it, use /setting.",
         "schedule_set": "You have set a schedule for {} in UTC-{}.",
         "bot_started": "Your bot has started!",
@@ -36,7 +36,7 @@
         "account_not_found_error": "Account not found.",
         "account_credentials_not_found": "Account email or password not found.",
         "trade_unsuccessful": "Trade at {} unsuccessful. Please check your balance and try again.",
-        "account_details": "You are {}, {}",
+        "trade_result": "You are {}, {}",
         "low_payout": "The asset payout is low. Please try other assets or trade later.",
         "low_balance": "Your account balance is running low. Please top up your account.",
         "real_account": "Real Account",
@@ -47,8 +47,9 @@
         "martin_gale_2": "Up to M.Gale 2",
         "account": "Account",
         "trading_amount": "Trading Amount",
-        "trade": "",
-        "language": "Language"
+        "trade": "Trade",
+        "language": "Language",
+        "welcome": "Welcome!"
     },
     "pt": {
         "selected_language": "Idioma selecionado",
@@ -87,7 +88,7 @@
         "account_not_found_error": "Conta não encontrada.",
         "account_credentials_not_found": "E-mail ou senha da conta não encontrados.",
         "trade_unsuccessful": "Negociação em {} não foi bem-sucedida. Por favor, verifique seu saldo e tente novamente.",
-        "account_details": "Você é {}, {}",
+        "trade_result": "Você é {}, {}",
         "low_payout": "O pagamento do ativo está baixo. Por favor, tente outros ativos ou negocie mais tarde.",
         "low_balance": "Seu saldo está baixo. Por favor, deposite mais fundos em sua conta.",
         "real_account": "Conta Real",
@@ -98,8 +99,9 @@
         "martin_gale_2": "Até M.Gale 2",
         "account": "Conta",
         "trading_amount": "Valor para Negociação",
-        "trade": "",
-        "language": "Idioma"
+        "trade": "Troca",
+        "language": "Idioma",
+        "welcome": "Bem-vindo!"
     },
     "es": {
         "selected_language": "Idioma seleccionado",
@@ -138,7 +140,7 @@
         "account_not_found_error": "Cuenta no encontrada.",
         "account_credentials_not_found": "Correo electrónico o contraseña de cuenta no encontrados.",
         "trade_unsuccessful": "Operación en {} no fue exitosa. Por favor, verifica tu saldo e intenta de nuevo.",
-        "account_details": "Tú eres {}, {}",
+        "trade_result": "Tú eres {}, {}",
         "low_payout": "El pago del activo es bajo. Por favor, intenta con otros activos u opera más tarde.",
         "low_balance": "Tu saldo está bajo. Por favor, recarga tu cuenta.",
         "real_account": "Cuenta Real",
@@ -149,7 +151,8 @@
         "martin_gale_2": "Hasta M.Gale 2",
         "account": "Cuenta",
         "trading_amount": "Monto para Operar",
-        "trade": "",
-        "language": "Idioma"
+        "trade": "Comercio",
+        "language": "Idioma",
+        "welcome": "¡Bienvenida!"
     }
   }

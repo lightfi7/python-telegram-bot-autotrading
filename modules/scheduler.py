@@ -6,6 +6,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from modules.database import insert_one, find_one, find_many, delete_one, update_one
 from modules.telegram import send_message
 from modules.iqoption import buy
+from lang import translate
 scheduler = BackgroundScheduler()
 
 
@@ -14,17 +15,17 @@ def do_trade(task):
     user = find_one('users', {'id': user_id})
     print(user)
     if user is None:
-        print(f'Not found a user: {user_id}')
+        print(f'not found a user: {user_id}')
         return
     if 'account' not in user['config']:
         return send_message({
             'chat_id': user_id,
-            'text': f'😶 Not found account.'
+            'text': f'😶 {translate('account_not_found_error', user['language'])}'
         })
     if 'email' not in user['config']['account'] or 'password' not in user['config']['account']:
         return send_message({
             'chat_id': user_id,
-            'text': f'😶 Not found account email or password.'
+            'text': f'😶 {translate('account_credentials_not_found', user['language'])}'
         })
 
     result, profit = buy(task['symbol'], 
@@ -39,7 +40,7 @@ def do_trade(task):
     if result is None:
         return send_message({
             'chat_id': user_id,
-            'text': f'😶 Trade at {task['time']} unsuccessful...'
+            'text': f'😶 {translate('trade_unsuccessful', user['language'])}'.format(task['time'])
         })
     insert_one('trade_histories', {
         'user_id': user_id,
@@ -54,7 +55,7 @@ def do_trade(task):
     if result == 'loss':
         send_message({
             'chat_id': user_id,
-            'text': f'👎You are {result}, {profit:6.2f}'
+            'text': f'👎 {translate('trade_result', user['language'])}'.format(result, f'{profit:6.2f}')
         })
         if task['martin_gale'] == 0:
             update_one('tasks', {'_id': task['_id']}, {
@@ -73,18 +74,18 @@ def do_trade(task):
     elif result == 'win':
         send_message({
             'chat_id': user_id,
-            'text': f'👍You are {result}, {profit:6.2f}'
+            'text': f'👍 {translate('trade_result', user['language'])}'.format(result, f'{profit:6.2f}')
         })
         delete_one('tasks', {'_id': task['_id']})
     elif result == 'balance_off':
         send_message({
             'chat_id': user_id,
-            'text': f'😶 Your account balance is running low.\nPlease top up your account'
+            'text': f'😶 {translate('low_balance', user['language'])}'
         })
     elif result == 'payout_off':
         send_message({
             'chat_id': user_id,
-            'text': f'😶 Asset payout is low.\n Please try other assets or later'
+            'text': f'😶 {translate('low_payout', user['language'])}'
         })
 
 
