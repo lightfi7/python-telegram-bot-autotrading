@@ -1,22 +1,46 @@
 import time
 import logging
+
 from iqoptionapi.stable_api import IQ_Option
 
+# logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 
-# logging.basicConfig(level=logging.DEBUG,format='%(asctime)s %(message)s')
-def buy(symbal, option, amount, duration):
-    Iq = IQ_Option('Allan.traderksa@gmail.com', '%$iqualab%')
+
+def buy(symbal, amount, option, duration, email, password):
+    # if email is None or password is None:
+    #     email = 'Allan.traderksa@gmail.com'
+    #     password = '%$iqualab%'
+    print(email, password)
+    Iq = IQ_Option(email, password)
     Iq.connect()
+
+    print(Iq.get_all_ACTIVES_OPCODE())
 
     Iq.change_balance('PRACTICE')
     balance = Iq.get_balance()
 
-    if balance < amount:
-        return 'balance', 0
+    payout = Iq.get_digital_payout(symbal)
+    print(payout)
 
-    _, order_id = Iq.buy(amount, symbal, option, duration)
-    while Iq.get_async_order(order_id) is None:
-        pass
-    (result, profit) = Iq.check_win_v4(order_id)
-    print(result, profit)
-    return result, profit
+    if payout < 30:
+        return 'payout_off', 0
+
+    if balance < amount:
+        return 'balance_off', 0
+
+    _, id = (Iq.buy_digital_spot(symbal, amount, option, duration))
+    if id != "error":
+        while True:
+            check, win = Iq.check_win_digital_v2(id)
+            if check:
+                break
+        if win < 0:
+            print("you loss " + str(win) + "$")
+            return 'loss', win
+        else:
+            print("you win " + str(win) + "$")
+            return 'win', win
+    else:
+        print("please try again")
+
+    return None, None

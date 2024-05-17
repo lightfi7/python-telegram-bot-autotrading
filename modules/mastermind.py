@@ -4,7 +4,7 @@ import re
 from modules.cache import cached, cache
 from config import OPTIONS, LANGUAGES
 from modules.database import insert_one
-from modules.telegram import send_message, copy_message
+from modules.telegram import send_message, copy_message, edit_message, delete_message, answer_callback_query
 from modules.utils import generate_key, verify_key, is_hex
 
 SOURCE_CHANNEL_ID = os.getenv('SOURCE_CHANNEL_ID', '')
@@ -86,7 +86,7 @@ def generate_response(data):
                         'chat_id': user_id,
                         'text': msg
                     }
-                    return send_message(json)
+                    send_message(json)
                 else:
                     json = {
                         'chat_id': user_id,
@@ -102,10 +102,10 @@ def generate_response(data):
                         [{'text': opt['label'], 'callback_data': f'@option>{opt["value"]}'} for opt in opts]
                         for opts in [
                             [{'label': 'Real Account' + (
-                                ' ✅' if 'config' in user['config'] and user['config']['account'] == 1 else ''),
+                                ' ✅' if 'config' in user['config'] and user['config']['account_type'] == 1 else ''),
                               'value': '@real'},
                              {'label': 'Practice Account' + (
-                                 ' ✅' if 'config' in user['config'] and user['config']['account'] == 2 else ''),
+                                 ' ✅' if 'config' in user['config'] and user['config']['account_type'] == 2 else ''),
                               'value': '@practice'}, ]
                         ]]
                     json = {
@@ -115,14 +115,30 @@ def generate_response(data):
                             'inline_keyboard': keyboard
                         }
                     }
-                    return send_message(json)
+                    send_message(json)
+                if callback_data == 'language':
+                    msg = (
+                        "🌐 Please select your preferred language:"
+                    )
+                    keyboard = [[{'text': item, 'callback_data': f'@language>{item}'} for item in group] for group in
+                                LANGUAGES]
+                    json = {
+                        'chat_id': user_id,
+                        'message_id': query['message']['message_id'],
+                        'text': msg,
+                        'reply_markup': {
+                            'inline_keyboard': keyboard,
+                            'force_reply': True
+                        },
+                    }
+                    send_message(json)
                 elif callback_data == 'trading_amount':
                     user['last_action'] = 'trading_amount'
                     json = {
                         'chat_id': user_id,
                         'text': 'Enter trading amount'
                     }
-                    return send_message(json)
+                    send_message(json)
                 elif callback_data == 'strategy':
                     user['last_action'] = 'strategy'
                     keyboard = [
@@ -138,7 +154,7 @@ def generate_response(data):
                             'inline_keyboard': keyboard
                         }
                     }
-                    return send_message(json)
+                    send_message(json)
                 elif callback_data == 'martin_gale':
                     user['last_action'] = 'martin_gale'
                     keyboard = [
@@ -158,25 +174,27 @@ def generate_response(data):
                             'inline_keyboard': keyboard
                         }
                     }
-                    return send_message(json)
+                    send_message(json)
                 elif callback_data == '@real':
-                    user['config']['account'] = 1
+                    user['last_action'] = 'account_email'
+                    user['config']['account_type'] = 1
                     cached(user_id, user)
                     json = {
                         'chat_id': user_id,
-                        'text': 'You set Account type as `Real`',
+                        'text': 'You set Account type as `Real`\nPlease register account email',
                         'parse_mode': 'markdown'
                     }
-                    return send_message(json)
+                    send_message(json)
                 elif callback_data == '@practice':
-                    user['config']['account'] = 2
+                    user['last_action'] = 'account_email'
+                    user['config']['account_type'] = 2
                     cached(user_id, user)
                     json = {
                         'chat_id': user_id,
-                        'text': 'You set Account type as `Practice`',
+                        'text': 'You set Account type as `Practice`\nPlease register account email',
                         'parse_mode': 'markdown'
                     }
-                    return send_message(json)
+                    send_message(json)
                 elif callback_data == '@up2m.gale1':
                     user['config']['@up2m.gale'] = 1
                     cached(user_id, user)
@@ -185,7 +203,7 @@ def generate_response(data):
                         'text': 'You set Martin Gale as `Up to M.Gale 1`',
                         'parse_mode': 'markdown'
                     }
-                    return send_message(json)
+                    send_message(json)
                 elif callback_data == '@up2m.gale2':
                     user['config']['@up2m.gale'] = 2
                     cached(user_id, user)
@@ -194,7 +212,7 @@ def generate_response(data):
                         'text': 'You set Martin Gale as `Up to M.Gale 2`',
                         'parse_mode': 'markdown'
                     }
-                    return send_message(json)
+                    send_message(json)
                 elif callback_data == '@fix_amount':
                     user['last_action'] = 'fix_amount'
                     cached(user_id, user)
@@ -202,7 +220,7 @@ def generate_response(data):
                         'chat_id': user_id,
                         'text': 'Enter fix amount',
                     }
-                    return send_message(json)
+                    send_message(json)
                 elif callback_data == '@over_balance':
                     user['last_action'] = 'over_balance'
                     cached(user_id, user)
@@ -210,23 +228,65 @@ def generate_response(data):
                         'chat_id': user_id,
                         'text': 'Enter % over the balance',
                     }
-                    return send_message(json)
+                    send_message(json)
                 else:
                     pass
             elif callback_type == '@trade':
                 utc_offset, symbol, at, option, protection1, protection2 = callback_data.split(',')
-                # make schedule
+                amount = 1
+                msg = ''
+                if 'account' in user['config']:
+                    email = user['config']['account']['email']
+                    password = user['config']['account']['password']
+                    if email is None or password is None:
+                        msg = 'Please register your email and password'
+                        json = {
+                            'chat_id': user_id,
+                            'text': msg,
+                        }
+                        return send_message(json)
+                else:
+                    msg = '😯 Not found your account email and password\n Use /setting command'
+                    json = {
+                        'chat_id': user_id,
+                        'text': msg,
+                    }
+                    return send_message(json)
+                if 'amount' in user['config']:
+                    amount = user['config']['trading_amount']
+                if amount is None:
+                    amount = 1
+                    msg = 'Default amount is 1\n To the amount, use /setting command\n'
                 insert_one('tasks', {
                     'user_id': user_id,
                     'utc_offset': utc_offset,
                     'symbol': f'{symbol}'.replace('/', ''),
+                    'amount': amount,
                     'time': at,
                     'option': option,
                     'protection1': protection1,
                     'protection2': protection2,
                     'martin_gale': 0
                 })
+                msg += f'😐 You had set the schedule for {at} in UTC-{utc_offset}'
+                json = {
+                    'chat_id': user_id,
+                    'message_id': query['message']['message_id'],
+                    'text': query['message']['text'],
+                }
+                edit_message(json)
+                send_message({
+                    'chat_id': user_id,
+                    'message_id': query['message']['message_id'],
+                    'text': msg
+                })
                 pass
+            else:
+                pass
+            return answer_callback_query({
+                'callback_query_id': query['id'],
+                'text': '😊'
+            })
         elif t == 'message':
             user_id = query['from']['id']
             text = query['text']
@@ -355,75 +415,48 @@ def generate_response(data):
                         'parse_mode': 'markdown'
                     }
                     return send_message(json)
-                else:
-                    pass
-        elif t == 'result':
-            user_id = query['from']['id']
-            user = cached(user_id,
-                          {
-                              'id': query['from']['id'],
-                              'username': query['from']['username'],
-                              'language': 'English 🇺🇸',
-                              'level': 0,
-                              'last_action': '',
-                              'config': {},
-                              'perm': 'guest',
-                          })
-            if user['last_action'] == 'token':
-                if user['perm'] == 'quest':
+                elif user['last_action'] == 'account_email':
+                    user['last_action'] = 'account_password'
+                    if 'account' in user['config']:
+                        user['config']['account']['email'] = query['text']
+                    else:
+                        user['config']['account'] = {
+                            'email': query['text'],
+                        }
+                    cached(user_id, user)
+                    delete_message({
+                        'chat_id': user_id,
+                        'message_id': query['message_id'],
+                    })
                     json = {
                         'chat_id': user_id,
-                        'text': '😁 Start the bot using the /stat command.'
+                        'text': '😊 Your account email was registered, Please register password',
+                        'parse_mode': 'markdown'
                     }
                     return send_message(json)
-                elif user['perm'] != 'user':
-                    if is_hex(query['text']) and verify_key(query['from']['id'],
-                                                            bytes.fromhex(query['text'])):
-                        user['perm'] = 'user'
-                        cached(user_id, user)
-                        user['last_action'] = None
-                        json = {
-                            'chat_id': user_id,
-                            'text': '😍 Successfully started the bot'
-                        }
-                        return send_message(json)
+                elif user['last_action'] == 'account_password':
+                    user['last_action'] = None
+                    if 'account' in user['config']:
+                        user['config']['account']['password'] = query['text']
                     else:
-                        json = {
+                        send_message({
                             'chat_id': user_id,
-                            'text': '🤨 Invalid token. Please try again. If the problem persists, '
-                                    'please contact support.'
-                        }
-                        return send_message(json)
-            elif user['last_action'] == 'trading_amount':
-                user['config']['trading_amount'] = int(query['text'])
-                cached(user_id, user)
-                user['last_action'] = None
-                json = {
-                    'chat_id': user_id,
-                    'text': 'Trading amount is set to `{}`'.format(query['text']),
-                    'parse_mode': 'markdown'
-                }
-                return send_message(json)
-            elif user['last_action'] == 'fix_amount':
-                user['config']['fix_amount'] = int(query['text'])
-                cached(user_id, user)
-                user['last_action'] = None
-                json = {
-                    'chat_id': user_id,
-                    'text': 'Fix amount is set to `{}`'.format(query['text']),
-                    'parse_mode': 'markdown'
-                }
-                return send_message(json)
-            elif user['last_action'] == 'over_balance':
-                user['config']['over_balance'] = int(query['text'])
-                cached(user_id, user)
-                user['last_action'] = None
-                json = {
-                    'chat_id': user_id,
-                    'text': 'Over % balance is set to `{}`'.format(query['text']),
-                    'parse_mode': 'markdown'
-                }
-                return send_message(json)
+                            'text': '😶 You should register your account email'
+                        })
+                    cached(user_id, user)
+                    delete_message({
+                        'chat_id': user_id,
+                        'message_id': query['message_id'],
+                    })
+                    json = {
+                        'chat_id': user_id,
+                        'message_id': query['message_id'],
+                        'text': '😊 You are success to register account',
+                        'parse_mode': 'markdown'
+                    }
+                    return send_message(json)
+                else:
+                    pass
         elif t == 'channel_post':
             if query['sender_chat']['id'] == int(SOURCE_CHANNEL_ID):
                 for uid in cache.keys():
