@@ -102,7 +102,8 @@ def generate_response(data):
                         [{'text': opt['label'], 'callback_data': f'@option>{opt["value"]}'} for opt in opts]
                         for opts in [
                             [{'label': translate('real_account', user['language']) + (
-                                ' ✅' if 'config' in user['config'] and user['config']['account_type'] == 1 else ''),
+                                ' ✅' if 'config' in user['config'] and user['config'][''
+                                                                                      ''] == 1 else ''),
                               'value': '@real'},
                              {'label': translate('practice_account', user['language']) + (
                                  ' ✅' if 'config' in user['config'] and user['config']['account_type'] == 2 else ''),
@@ -252,9 +253,9 @@ def generate_response(data):
                         'text': msg,
                     }
                     return send_message(json)
-                if 'amount' in user['config']:
+                if 'trading_amount' in user['config']:
                     amount = user['config']['trading_amount']
-                if amount is None:
+                else:
                     amount = 1
                     msg = f'{translate('default_amount', user['language'])}\n'
                 insert_one('tasks', {
@@ -388,6 +389,12 @@ def generate_response(data):
                     'reply_markup': {
                         'inline_keyboard': keyboard
                     }
+                }
+                return send_message(json)
+            elif '/help' in text.lower():
+                json = {
+                    'chat_id': user_id,
+                    'text': 'Developed by ...'
                 }
                 return send_message(json)
             else:

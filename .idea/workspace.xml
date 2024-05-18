@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b795f876-e64f-4f53-a870-9bf28eee9514" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/lang/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/lang.json" beforeDir="false" afterPath="$PROJECT_DIR$/lang/lang.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/mastermind.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/mastermind.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/scheduler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +126,7 @@
       <workItem from="1715871651786" duration="11741000" />
       <workItem from="1715904214395" duration="944000" />
       <workItem from="1715907835206" duration="6122000" />
-      <workItem from="1715915697236" duration="38390000" />
+      <workItem from="1715915697236" duration="46073000" />
     </task>
     <servers />
   </component>
@@ -134,7 +137,7 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/python_telegram_bot_autotrading$python_telegram_bot_autotrading.coverage" NAME="python-telegram-bot-autotrading Coverage Results" MODIFIED="1715980157238" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/python_telegram_bot_autotrading$python_telegram_bot_autotrading.coverage" NAME="python-telegram-bot-autotrading Coverage Results" MODIFIED="1716018098194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/python_telegram_bot_autotrading$iqoption.coverage" NAME="iqoption Coverage Results" MODIFIED="1715969392619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />
     <SUITE FILE_PATH="coverage/python_telegram_bot_autotrading$timezone.coverage" NAME="timezone Coverage Results" MODIFIED="1715944890433" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />
     <SUITE FILE_PATH="coverage/python_telegram_bot_autotrading$scheduler.coverage" NAME="scheduler Coverage Results" MODIFIED="1715915994606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules" />

@@ -117,7 +117,7 @@ def scheduled():
                                                current_datetime.hour, current_datetime.minute, current_datetime.second,
                                                tzinfo=time_zone)
 
-        if scheduled_datetime == current_datetime_without_tz:
+        if scheduled_datetime == current_datetime_without_tz-timedelta(seconds=5):
             threading.Thread(target=do_trade, args=(task,)).start()
         elif scheduled_datetime < current_datetime_without_tz-timedelta(minutes=30):
             delete_one('tasks', {'_id': task['_id']})
